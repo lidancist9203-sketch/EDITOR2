@@ -1,0 +1,5 @@
+{
+  "name": "RedGreen Creator",
+  "description": "A one-stop AI content creation platform for WeChat Official Accounts and Xiaohongshu (Red Note), powered by Gemini.",
+  "requestFramePermissions": []
+}
