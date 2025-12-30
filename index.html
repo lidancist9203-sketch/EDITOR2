@@ -35,6 +35,10 @@
   }
 }
 </script>
+<script>
+    // Polyfill for process.env to prevent ReferenceError in browser environments without a bundler
+    window.process = window.process || { env: { API_KEY: '' } };
+</script>
 </head>
   <body class="bg-slate-50 text-slate-900 h-screen overflow-hidden">
     <div id="root" class="h-full"></div>

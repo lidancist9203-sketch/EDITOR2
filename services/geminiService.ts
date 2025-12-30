@@ -1,7 +1,10 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { WeChatArticle, RedBookPost } from "../types";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+// Helper to initialize client lazily
+const getAiClient = () => {
+  return new GoogleGenAI({ apiKey: process.env.API_KEY });
+};
 
 const TEXT_MODEL = "gemini-3-flash-preview";
 const IMAGE_MODEL = "gemini-2.5-flash-image";
@@ -14,6 +17,7 @@ export const generateWeChatArticleStructure = async (
   topic: string,
   imageCount: number
 ): Promise<WeChatArticle> => {
+  const ai = getAiClient();
   const prompt = `
     You are a professional WeChat Official Account (公众号) editor.
     Create a detailed, engaging article about the topic: "${topic}".
@@ -76,6 +80,7 @@ export const generateWeChatArticleStructure = async (
 export const generateRedBookPostContent = async (
   topic: string
 ): Promise<RedBookPost> => {
+  const ai = getAiClient();
   const prompt = `
     You are a top Xiaohongshu (Little Red Book) influencer. 
     Create a viral post about: "${topic}".
@@ -124,6 +129,7 @@ export const generateRedBookPostContent = async (
  * Generates a single image based on a prompt.
  */
 export const generateImage = async (prompt: string): Promise<string> => {
+  const ai = getAiClient();
   try {
     const response = await ai.models.generateContent({
       model: IMAGE_MODEL,
